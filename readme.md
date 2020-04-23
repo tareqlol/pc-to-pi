@@ -1,2 +1,9 @@
-# electron-express
-Example of running basic node.js express middleware from an Electron app.
+# pc-to-pi
+
+do 
+`npm i `
+`cd http`
+`npm i `
+`cd ../`
+`npm run start`
+and then it will expose the server on http://localhost:42100/
