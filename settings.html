@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>pc to pi Settings</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
+	<body>
+		<div class="container">
+			<h2>pc to pi Settings</h2>
+			<section class="main">
+				<form name="settingsForm">
+					<div class="field">
+						<label for="weatherApiKey">
+							weatherApiKey
+							<input type="text" id="weatherApiKey" name="weatherApiKey">
+						</label>
+					</div>
+					<div class="field">
+						<label for="refreshDataSeconds">
+							refreshDataSeconds
+							<input type="number" id="refreshDataSeconds" name="refreshDataSeconds">
+						</label>
+					</div>
+					<div class="field">
+						<label for="refreshWeatherDataSeconds">
+							refreshWeatherDataSeconds
+							<input type="number" id="refreshWeatherDataSeconds" name="refreshWeatherDataSeconds">
+						</label>
+					</div>	
+					<button type="submit">Save</button>
+				</form>
+			</section>
+		</div>
+		<script>
+			const { ipcRenderer } = require('electron')
+			let form = document.querySelector('form[name="settingsForm"]');
+			var weatherApiKey = document.getElementById('weatherApiKey');
+			var refreshDataSeconds = document.getElementById('refreshDataSeconds');
+			var refreshWeatherDataSeconds = document.getElementById('refreshWeatherDataSeconds')
+			form.onsubmit = (function () {
+				let data = {
+					weatherApiKey: weatherApiKey.value,
+					refreshDataSeconds: refreshDataSeconds.value,
+					refreshWeatherDataSeconds: refreshWeatherDataSeconds.value
+				}
+				ipcRenderer.send('save-settings', data)
+			})
+			ipcRenderer.on('settings-data', function (event, [key, data]) {
+				window[key].value = data
+			})
+			ipcRenderer.send('get-settings', ['weatherApiKey', 'refreshDataSeconds', 'refreshWeatherDataSeconds'])
+		</script>
+	</body>
+</html>

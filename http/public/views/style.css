@@ -1,0 +1,159 @@
+
+body {
+  background-color: #000;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.screen {
+  animation: colorPulse 5s infinite ease-in-out;
+  background-image:radial-gradient(#444, #111);
+  background: #111;
+  box-shadow: 0 0 5vmin 1vmin #000 inset;
+  box-sizing: border-box;
+  font-family: "Fira Mono", monospace;
+  font-size: 16px;
+  height: 100vh;
+  overflow: hidden;
+  padding: 2vmin;
+  width: 100vw;
+}
+
+.screen:before {
+  animation:wave 10s infinite ease-in-out;
+  content: "";
+  height: 20vh;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.screen:after {
+  background-image: linear-gradient(transparent, transparent 3px, #222);
+  background-size: 4px 4px;
+  bottom: 0;
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+p:last-child:after {
+  animation: blink 1s infinite;
+  content: "_";
+}
+ul {
+  margin: 0;
+  padding: 0 0 0 30px;
+}
+ul span{
+  display: inline-block;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+@keyframes colorPulse {
+  0%,
+  100% {
+    color: #0c0;
+  }
+  48%,
+  52% {
+    color: #090;
+  }
+  50% {
+    color: #060;
+  }
+}
+
+@keyframes wave {
+  0% {
+    box-shadow: 0 -10vh 20vh #0c0;
+    top: -100vh;
+  }
+  48%,
+  52% {
+    box-shadow: 0 -10vh 20vh #090;
+  }
+  50% {
+    box-shadow: 0 -10vh 20vh #060;
+  }
+  100% {
+    box-shadow: 0 -10vh 20vh #0c0;
+    top: 200vh;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.block {
+  width: calc(50% - 84px);
+  border: 2px;
+  border-style: dashed solid;
+  padding: 15px 20px;
+  position: relative;
+  margin: 20px;
+}
+.block:nth-child(2n+1) {
+  float: left;
+}
+.block:nth-child(2n+2) {
+  float: right;
+}
+.block:last-child {
+  margin-right: 0;
+}
+.block__header {
+  margin: 0;
+  top: -23px;
+  left: 0;
+  position: absolute;
+  font-size: 2rem;
+  color: #00c800;
+  text-align: center;
+  width: 100%;
+}
+.block__header span{
+  background: #111;
+  display: inline-block;
+  padding: 0 5px;
+}
+.block__footer {
+  margin: 0;
+  position: absolute;
+  bottom: -2px;
+  left: 40%;
+  background: #111;
+  width: 23%;
+  height: 2px;
+}
+
+.load {
+  margin-top: 10px;;
+}
+.load__bar {
+  background-image: linear-gradient(to right, #0c0 94%, #111 86% );
+  background-position: bottom;
+  background-size: 30px 22px;
+  background-repeat: repeat-x;
+  color: #111;
+  text-align: right;
+}
+.load__bar span {
+  display: inline-block;
+  background: #006100;
+  padding: 0 10px;
+  color: white;
+}
